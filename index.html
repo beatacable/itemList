@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+     <title>SNC app</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+
+<script>
+var app = angular.module("myList", []);
+app.controller("myCtrl", function($scope) {
+    $scope.products = [];
+
+    $scope.addItem = function () {
+        $scope.products.push($scope.addMe);
+    // $scope.addPrice = function () {
+    //    $scope.price.push($scope.addPrice);
+    //     // $scope.price.push($scope.addPrice);
+    }
+    $scope.removeItem = function (x) {
+        $scope.products.splice(x, 1);
+        // $scope.price.splice(x, 1);
+    }
+});
+
+
+</script>
+
+
+
+<div ng-app="myList" data-ng-init="" ng-controller="myCtrl">
+
+  <h2>There are {{products.length}} items in your list</h2>
+
+<br>
+    <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">×</span></li>
+  </ul>
+   Product <input ng-model="addMe" type="text" placeholder="type product here">
+   Price <input ng-model="addPrice" type="text" placeholder="type price here">
+
+  <button ng-click="addItem()">Add</button>
+</div>
+<br>
+<p>Click the little x to remove an item from the list.</p>
+
+</body>
+</html>
