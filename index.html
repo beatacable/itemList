@@ -8,6 +8,128 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
+<script>
+
+ function calc() {
+   var n1 = parseInt(document.getElementById('n1').value);
+   var n2 = parseInt(document.getElementById('n2').value);
+   var oper = document.getElementById('operators').value;
+
+   if(oper === '+')
+   {
+     document.getElementById('result').value = n1 + n2;
+   }
+
+   if(oper === '-')
+   {
+     document.getElementById('result').value = n1 - n2;
+   }
+
+   if(oper === '/')
+   {
+     document.getElementById('result').value = n1 / n2;
+   }
+ }
+
+//  function mean(numbers) {
+//   var mean = parseInt(document.getElementById('mean').value);
+// }
+// var total = 0,
+//      i;
+//  for (i = 0; i < numbers.length; i += 1) {
+//      total += numbers[i];
+//  }
+//  return total / numbers.length;
+// }
+// if(mean)
+// {
+//   document.getElementById('meanTotal').value = total / numbers.lengts;
+// }
+</script>
+<script type = "text/javascript">
+
+        var standard_deviation = 0;
+
+        var sdOutput = document.getElementById('sd');
+
+    function processData()
+    {
+        var arrayOfLines = document.getElementById('myTextArea').value.split('\n');
+
+
+        findStandardDeviation(arrayOfLines);
+    }
+var mean = 0;
+var count = length;
+var variance = 0;
+var standard_deviation = 0;
+
+var meanOutput = document.getElementById('mean');
+var varianceOutput = document.getElementById('variance');
+var sdOutput = document.getElementById('sd');
+
+function processData() {
+  var arrayOfLines = document.getElementById('myTextArea').value.split('\n');
+
+  var sum = findSum(arrayOfLines);
+  findMeanOutput(arrayOfLines, sum);
+  findVariance(arrayOfLines);
+  findStandardDeviation(arrayOfLines);
+}
+
+function findSum(array) {
+  var count = array.length;
+  var sum = 0;
+
+  for (var a = 0; a < array.length; a++) {
+    sum += parseInt(array[a]);
+  }
+
+  countOutput.innerHTML = "Count: " + array.length;
+  sumOutput.innerHTML = "Sum: " + JSON.stringify(sum);
+  sum = parseInt(sum);
+  return sum;
+}
+
+function findMean(array) //Used for finding mean and then returning it
+{
+  var sum = 0;
+
+  for (var a = 0; a < array.length; a++) {
+    sum += parseFloat(array[a]);
+  }
+
+  mean = sum / array.length;
+  return mean;
+}
+
+function findMeanOutput(array, sum) //finds mean and then establishes it as the mean for users input
+{
+  mean = sum / array.length;
+  meanOutput.innerHTML = "Mean: " + mean;
+}
+
+function findVariance(array) {
+  var mean = findMean(array);
+
+  var variance = "Variance: " + findMean(array.map(function(num) {
+    return Math.pow(num - mean, 2);
+  })).toFixed(2);
+
+  varianceOutput.innerHTML = "Variance: " + variance;
+  return variance;
+}
+
+function findStandardDeviation(array) {
+  var variance = findVariance(array);
+  variance = parseFloat(variance);
+  alert(typeof variance);
+  alert("variance " + variance);
+  alert("sd" + Math.sqrt(variance));
+  sdOutput.innerHTML = "Standard Deviation: " + Math.sqrt(variance).toFixed(2);
+}
+
+</script>
 <style>
 body {
   background-color: #E0E0E0;
@@ -88,7 +210,39 @@ app.controller("myCtrl", function($scope) {
  <button onclick="download('text.txt', 'Hello SNC!');">download</button>
  <br>
  <br>
-<textarea></textarea>
+
+  <input type="text" id="n1"/>
+
+
+  <select id="operators"/>
+
+    <option value"+">+</option>
+    <option value"-">-</option>
+    <option value"/">/</option>
+
+
+  <input type="text" id="n2"/>
+
+  </select>
+
+  <button onclick="calc();">=</button>
+  <input type="text" id="result"/>
+  <br>
+  <br>
+  <p> Please enter a series of numbers, each separated by a new line.<br>
+    <p>
+      <textarea id="myTextArea" rows="7" cols="50"></textarea><br>
+      <button onclick="processData()">Done</button>
+      <p id="mean"></p>
+      <p id="count"></p>
+      <p id="sum"></p>
+      <p id="variance"></p>
+      <p id="sd"></p>
+
+  <!-- <input type="text" id="mean">
+  <button onclick="mean()">MEAN</button>
+  <input type="text" id="meanTotal"/> -->
+
 <br>
 <h3>Text file here</h3>
 <iframe name="Iframe1" src="fs/text.txt"></iframe>
