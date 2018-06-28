@@ -5,172 +5,17 @@
      <title>SNC app</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/style.css">
+    <script type='text/html' src="/js/mean.js"></script>
+    <script type='text/html' src="/js/calc.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type='text/html' src='js/statisticcalc.js'></script>
+    <script language="JavaScript"></script>
 
-<script>
-
- function calc() {
-   var n1 = parseInt(document.getElementById('n1').value);
-   var n2 = parseInt(document.getElementById('n2').value);
-   var oper = document.getElementById('operators').value;
-
-   if(oper === '+')
-   {
-     document.getElementById('result').value = n1 + n2;
-   }
-
-   if(oper === '-')
-   {
-     document.getElementById('result').value = n1 - n2;
-   }
-
-   if(oper === '/')
-   {
-     document.getElementById('result').value = n1 / n2;
-   }
- }
-
-//  function mean(numbers) {
-//   var mean = parseInt(document.getElementById('mean').value);
-// }
-// var total = 0,
-//      i;
-//  for (i = 0; i < numbers.length; i += 1) {
-//      total += numbers[i];
-//  }
-//  return total / numbers.length;
-// }
-// if(mean)
-// {
-//   document.getElementById('meanTotal').value = total / numbers.lengts;
-// }
-</script>
-<script type = "text/javascript">
-
-        var standard_deviation = 0;
-
-        var sdOutput = document.getElementById('sd');
-
-    function processData()
-    {
-        var arrayOfLines = document.getElementById('myTextArea').value.split('\n');
-
-
-        findStandardDeviation(arrayOfLines);
-    }
-var mean = 0;
-var count = length;
-var variance = 0;
-var standard_deviation = 0;
-
-var meanOutput = document.getElementById('mean');
-var varianceOutput = document.getElementById('variance');
-var sdOutput = document.getElementById('sd');
-
-function processData() {
-  var arrayOfLines = document.getElementById('myTextArea').value.split('\n');
-
-  var sum = findSum(arrayOfLines);
-  findMeanOutput(arrayOfLines, sum);
-  findVariance(arrayOfLines);
-  findStandardDeviation(arrayOfLines);
-}
-
-function findSum(array) {
-  var count = array.length;
-  var sum = 0;
-
-  for (var a = 0; a < array.length; a++) {
-    sum += parseInt(array[a]);
-  }
-
-  countOutput.innerHTML = "Count: " + array.length;
-  sumOutput.innerHTML = "Sum: " + JSON.stringify(sum);
-  sum = parseInt(sum);
-  return sum;
-}
-
-function findMean(array) //Used for finding mean and then returning it
-{
-  var sum = 0;
-
-  for (var a = 0; a < array.length; a++) {
-    sum += parseFloat(array[a]);
-  }
-
-  mean = sum / array.length;
-  return mean;
-}
-
-function findMeanOutput(array, sum) //finds mean and then establishes it as the mean for users input
-{
-  mean = sum / array.length;
-  meanOutput.innerHTML = "Mean: " + mean;
-}
-
-function findVariance(array) {
-  var mean = findMean(array);
-
-  var variance = "Variance: " + findMean(array.map(function(num) {
-    return Math.pow(num - mean, 2);
-  })).toFixed(2);
-
-  varianceOutput.innerHTML = "Variance: " + variance;
-  return variance;
-}
-
-function findStandardDeviation(array) {
-  var variance = findVariance(array);
-  variance = parseFloat(variance);
-  alert(typeof variance);
-  alert("variance " + variance);
-  alert("sd" + Math.sqrt(variance));
-  sdOutput.innerHTML = "Standard Deviation: " + Math.sqrt(variance).toFixed(2);
-}
-
-</script>
-<style>
-body {
-  background-color: #E0E0E0;
-  text-align: center;
-}
-div {
-  align-content: center;
-}
-button {
-  align-self: center;
-
-}
-iframe {
-  padding-bottom: 1px;
-  width: 90%;
-  height: 70%;
-}
-li {
-  text-align: center;
-
-}
-</style>
-    <script type="text/javascript">
-          function linkDownload(a, filename, content) {
-            contentType =  'data:application/octet-stream,';
-            uriContent = contentType + encodeURIComponent(content);
-            a.setAttribute('href', uriContent);
-            a.setAttribute('download', filename);
-          }
-          function download(filename, content) {
-            var a = document.createElement('a');
-            linkDownload(a, filename, content);
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-          }
-    </script>
 </head>
-<body>
 
-<script>
+<body>
+ <script>
 var app = angular.module("myList", []);
 app.controller("myCtrl", function($scope) {
     $scope.products = [];
@@ -181,16 +26,26 @@ app.controller("myCtrl", function($scope) {
     }
     $scope.removeItem = function (x) {
         $scope.products.splice(x, 1);
-
+    }
+    function linkDownload(a, filename, content) {
+      contentType =  'data:application/octet-stream,';
+      uriContent = contentType + encodeURIComponent(content);
+      a.setAttribute('href', uriContent);
+      a.setAttribute('download', filename);
+    }
+    $scope.download = function(filename) {
+      var a = document.createElement('a');
+      linkDownload(a, filename, $scope.products);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 });
-
-
 </script>
 
 
 
-<div ng-app="myList" data-ng-init="" ng-controller="myCtrl">
+<div ng-app="myList" ng-controller="myCtrl">
 
   <h2>There are {{products.length}} items in your list</h2>
 
@@ -200,54 +55,61 @@ app.controller("myCtrl", function($scope) {
   <br>
   <br>
    Product <input ng-model="addMe" type="text" placeholder="type product here">
-   Price <input ng-model="addPrice" type="text" placeholder="type price here">
 
   <button ng-click="addItem()">Add</button>
+  <br>
+  <br>
+  <p>Click the x to remove an item from the list.</p>
+
+   <button ng-click="download('text.txt');">export to txt file</button>
+   <br>
+   <br>
 </div>
-<br>
-<p>Click the little x to remove an item from the list.</p>
-
- <button onclick="download('text.txt', 'Hello SNC!');">download</button>
- <br>
- <br>
-
+<div>
   <input type="text" id="n1"/>
+   <select id="operators"/>
 
-
-  <select id="operators"/>
-
-    <option value"+">+</option>
-    <option value"-">-</option>
-    <option value"/">/</option>
-
-
-  <input type="text" id="n2"/>
-
+     <option value"+">+</option>
+     <option value"-">-</option>
+     <option value"/">/</option>
   </select>
+   <input type="text" id="n2"/>
 
   <button onclick="calc();">=</button>
   <input type="text" id="result"/>
+</div>
   <br>
   <br>
-  <p> Please enter a series of numbers, each separated by a new line.<br>
-    <p>
-      <textarea id="myTextArea" rows="7" cols="50"></textarea><br>
-      <button onclick="processData()">Done</button>
-      <p id="mean"></p>
-      <p id="count"></p>
-      <p id="sum"></p>
-      <p id="variance"></p>
-      <p id="sd"></p>
 
-  <!-- <input type="text" id="mean">
-  <button onclick="mean()">MEAN</button>
-  <input type="text" id="meanTotal"/> -->
-
-<br>
-<h3>Text file here</h3>
-<iframe name="Iframe1" src="fs/text.txt"></iframe>
-
-<!-- <a href="index.html" onclick="linkDownload(data, 'text.txt', 'Hello SNC!');">download</a> -->
+<h3>Statistical Calculations</h3>
+<table>
+    <tr>
+        <td>Input Number:</td><td><input type='text' id='input'></td>
+    </tr>
+    <tr>
+        <td colpsan='2'><input type='button' value='Add Number' onClick='addNumber()'></td>
+    </tr>
+    <tr>
+        <td colspan='2'>
+            <select id='list' size='5'>
+            </select>
+        </td>
+    </tr>
+        <tr>
+                <td colpsan='2'><input type='button' value='Calculate!' onClick='getStatistics()'></td>
+        </tr>
+        <tr>
+                <td>Summation:</td><td><input type='text' id='summation' readonly></td>
+        </tr>
+        <tr>
+                <td>Mean:</td><td><input type='text' id='mean' readonly></td>
+        </tr>
+    <tr>
+                <td>Variance:</td><td><input type='text' id='variance' readonly></td>
+        </tr>
+    <tr>
+                <td>Standard Deviation:</td><td><input type='text' id='standardDev' readonly></td>
+        </tr>
 
 
 </body>
