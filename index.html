@@ -5,50 +5,17 @@
      <title>SNC app</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/style.css">
+    <script type='text/html' src="/js/mean.js"></script>
+    <script type='text/html' src="/js/calc.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type='text/html' src='js/statisticcalc.js'></script>
+    <script language="JavaScript"></script>
 
-<style>
-body {
-  background-color: #E0E0E0;
-  text-align: center;
-}
-div {
-  align-content: center;
-}
-button {
-  align-self: center;
-
-}
-iframe {
-  padding-bottom: 1px;
-  width: 90%;
-  height: 70%;
-}
-li {
-  text-align: center;
-
-}
-</style>
-    <script type="text/javascript">
-          function linkDownload(a, filename, content) {
-            contentType =  'data:application/octet-stream,';
-            uriContent = contentType + encodeURIComponent(content);
-            a.setAttribute('href', uriContent);
-            a.setAttribute('download', filename);
-          }
-          function download(filename, content) {
-            var a = document.createElement('a');
-            linkDownload(a, filename, content);
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-          }
-    </script>
 </head>
-<body>
 
-<script>
+<body>
+ <script>
 var app = angular.module("myList", []);
 app.controller("myCtrl", function($scope) {
     $scope.products = [];
@@ -59,16 +26,26 @@ app.controller("myCtrl", function($scope) {
     }
     $scope.removeItem = function (x) {
         $scope.products.splice(x, 1);
-
+    }
+    function linkDownload(a, filename, content) {
+      contentType =  'data:application/octet-stream,';
+      uriContent = contentType + encodeURIComponent(content);
+      a.setAttribute('href', uriContent);
+      a.setAttribute('download', filename);
+    }
+    $scope.download = function(filename) {
+      var a = document.createElement('a');
+      linkDownload(a, filename, $scope.products);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 });
-
-
 </script>
 
 
 
-<div ng-app="myList" data-ng-init="" ng-controller="myCtrl">
+<div ng-app="myList" ng-controller="myCtrl">
 
   <h2>There are {{products.length}} items in your list</h2>
 
@@ -78,22 +55,61 @@ app.controller("myCtrl", function($scope) {
   <br>
   <br>
    Product <input ng-model="addMe" type="text" placeholder="type product here">
-   Price <input ng-model="addPrice" type="text" placeholder="type price here">
 
   <button ng-click="addItem()">Add</button>
+  <br>
+  <br>
+  <p>Click the x to remove an item from the list.</p>
+
+   <button ng-click="download('text.txt');">export to txt file</button>
+   <br>
+   <br>
 </div>
-<br>
-<p>Click the little x to remove an item from the list.</p>
+<div>
+  <input type="text" id="n1"/>
+   <select id="operators"/>
 
- <button onclick="download('text.txt', 'Hello SNC!');">download</button>
- <br>
- <br>
-<textarea></textarea>
-<br>
-<h3>Text file here</h3>
-<iframe name="Iframe1" src="fs/text.txt"></iframe>
+     <option value"+">+</option>
+     <option value"-">-</option>
+     <option value"/">/</option>
+  </select>
+   <input type="text" id="n2"/>
 
-<!-- <a href="index.html" onclick="linkDownload(data, 'text.txt', 'Hello SNC!');">download</a> -->
+  <button onclick="calc();">=</button>
+  <input type="text" id="result"/>
+</div>
+  <br>
+  <br>
+
+<h3>Statistical Calculations</h3>
+<table>
+    <tr>
+        <td>Input Number:</td><td><input type='text' id='input'></td>
+    </tr>
+    <tr>
+        <td colpsan='2'><input type='button' value='Add Number' onClick='addNumber()'></td>
+    </tr>
+    <tr>
+        <td colspan='2'>
+            <select id='list' size='5'>
+            </select>
+        </td>
+    </tr>
+        <tr>
+                <td colpsan='2'><input type='button' value='Calculate!' onClick='getStatistics()'></td>
+        </tr>
+        <tr>
+                <td>Summation:</td><td><input type='text' id='summation' readonly></td>
+        </tr>
+        <tr>
+                <td>Mean:</td><td><input type='text' id='mean' readonly></td>
+        </tr>
+    <tr>
+                <td>Variance:</td><td><input type='text' id='variance' readonly></td>
+        </tr>
+    <tr>
+                <td>Standard Deviation:</td><td><input type='text' id='standardDev' readonly></td>
+        </tr>
 
 
 </body>
