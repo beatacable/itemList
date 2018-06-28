@@ -5,9 +5,46 @@
      <title>SNC app</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<style>
+body {
+  background-color: #E0E0E0;
+  text-align: center;
+}
+div {
+  align-content: center;
+}
+button {
+  align-self: center;
+
+}
+iframe {
+  padding-bottom: 1px;
+  width: 90%;
+  height: 70%;
+}
+li {
+  text-align: center;
+
+}
+</style>
+    <script type="text/javascript">
+          function linkDownload(a, filename, content) {
+            contentType =  'data:application/octet-stream,';
+            uriContent = contentType + encodeURIComponent(content);
+            a.setAttribute('href', uriContent);
+            a.setAttribute('download', filename);
+          }
+          function download(filename, content) {
+            var a = document.createElement('a');
+            linkDownload(a, filename, content);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }
+    </script>
 </head>
 <body>
 
@@ -18,13 +55,11 @@ app.controller("myCtrl", function($scope) {
 
     $scope.addItem = function () {
         $scope.products.push($scope.addMe);
-    // $scope.addPrice = function () {
-    //    $scope.price.push($scope.addPrice);
-    //     // $scope.price.push($scope.addPrice);
+
     }
     $scope.removeItem = function (x) {
         $scope.products.splice(x, 1);
-        // $scope.price.splice(x, 1);
+
     }
 });
 
@@ -39,7 +74,9 @@ app.controller("myCtrl", function($scope) {
 
 <br>
     <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">×</span></li>
-  </ul>
+
+  <br>
+  <br>
    Product <input ng-model="addMe" type="text" placeholder="type product here">
    Price <input ng-model="addPrice" type="text" placeholder="type price here">
 
@@ -47,6 +84,17 @@ app.controller("myCtrl", function($scope) {
 </div>
 <br>
 <p>Click the little x to remove an item from the list.</p>
+
+ <button onclick="download('text.txt', 'Hello SNC!');">download</button>
+ <br>
+ <br>
+<textarea></textarea>
+<br>
+<h3>Text file here</h3>
+<iframe name="Iframe1" src="fs/text.txt"></iframe>
+
+<!-- <a href="index.html" onclick="linkDownload(data, 'text.txt', 'Hello SNC!');">download</a> -->
+
 
 </body>
 </html>
