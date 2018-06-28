@@ -1,24 +1,41 @@
 // standardDeviation:
-function standardDeviation(values){
-  var avg = average(values);
 
-  var squareDiffs = values.map(function(value){
-    var diff = value - avg;
-    var sqrDiff = diff * diff;
-    return sqrDiff;
-  });
-
-  var avgSquareDiff = average(squareDiffs);
-
-  var stdDev = Math.sqrt(avgSquareDiff);
-  return stdDev;
+function variance(arr)
+{
+var len = 0;
+var sum=0;
+for(var i=0;i<arr.length;i++)
+{
+if (arr[i] == ""){}
+else if (!isNum(arr[i]))
+{
+alert(arr[i] + " is not number, Variance Calculation failed!");
+return 0;
+}
+else
+{
+len = len + 1;
+sum = sum + parseFloat(arr[i]);
+}
+}
+var v = 0;
+if (len > 1)
+{
+var mean = sum / len;
+for(var i=0;i<arr.length;i++)
+{
+if (arr[i] == ""){}
+else
+{
+v = v + (arr[i] - mean) * (arr[i] - mean);
+}
+}
+return v / len;
+}
+else
+{
+return 0;
+}
 }
 
-function average(data){
-  var sum = data.reduce(function(sum, value){
-    return sum + value;
-  }, 0);
-
-  var avg = sum / data.length;
-  return avg;
-}
+var sd = Math.sqrt(variance(arr));
