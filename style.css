@@ -1,7 +1,26 @@
+
 body {
   background-color: #E0E0E0;
   text-align: center;
 }
 div {
   align-content: center;
+}
+button {
+  align-self: center;
+
+}
+iframe {
+  padding-bottom: 1px;
+  width: 90%;
+  height: 70%;
+}
+li {
+  text-align: center;
+}
+table {
+  align-items: center;
+}
+input {
+  align-self: center;
 }
