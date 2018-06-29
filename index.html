@@ -10,7 +10,10 @@
     <script type='text/html' src="js/calc.js"></script>
     <script type='text/html' src="js/std.js"></script>
     <script type='text/html' src="js/var.js"></script>
+    <script type='text/html' src="js/sum.js"></script>
+    <script type='text/html' src="js/diff.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
 
     <script language="JavaScript"></script>
 
@@ -85,13 +88,15 @@ app.controller("myCtrl", function($scope) {
 
 <h3>Statistical Calculations</h3>
 
-<textarea rows="1" cols="30"></textarea><br><br>
-<button onclick="mean()">MEAN calc.</button>
-<button onclick="variance()">Variance calc.</button>
-<button onclick="standardDeviation()">SD calc.</button>
-<button onclick="sum()"> Sum calc.</button>
+<textarea id="userInput" rows="1" cols="30"></textarea><br><br>
+<button onClick="mean()">MEAN calc</button>
+<button onClick="variance()">Variance calc</button>
+<button onClick="sum()">SD calc</button>
+<button onClick="sum()">Sum calc</button>
+<button onClick="diff()">Diff calc</button>
 <br><br>
 <input type='text' id='output' readonly>
+
 
 
 
