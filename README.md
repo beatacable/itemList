@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 Beata Cable 06/29/2018
 
 # App "itemList" - requirements:
@@ -39,5 +39,4 @@ Be prepared to explain your code).
 5) Has a button that calculates the Variance and outputs it in a text box
 6) Has a button that calculates the Sum and outputs it in a text box
 7) Has a button that calculates the Mean and outputs it in a text box
-8) Has a button that calculates the differences and outputs in a text box 
->>>>>>> 82aa4644d08cbd0fc2e294fdb5844e0ed56a5028
+8) Has a button that calculates the differences and outputs in a text box
