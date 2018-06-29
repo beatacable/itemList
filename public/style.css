@@ -10,7 +10,15 @@ button {
   align-self: center;
 
 }
+<<<<<<< HEAD
 
+=======
+iframe {
+  padding-bottom: 1px;
+  width: 90%;
+  height: 70%;
+}
+>>>>>>> 82aa4644d08cbd0fc2e294fdb5844e0ed56a5028
 li {
   text-align: center;
 }

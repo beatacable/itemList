@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,3 +71,109 @@
 </div>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+     <title>SNC app</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/style.css">
+    <script type='text/html' src="js/mean.js"></script>
+    <script type='text/html' src="js/calc.js"></script>
+    <script type='text/html' src="js/std.js"></script>
+    <script type='text/html' src="js/var.js"></script>
+    <script type='text/html' src="js/sum.js"></script>
+    <script type='text/html' src="js/diff.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+
+    <script language="JavaScript"></script>
+
+</head>
+
+<body>
+ <script>
+var app = angular.module("myList", []);
+app.controller("myCtrl", function($scope) {
+    $scope.products = [];
+
+    $scope.addItem = function () {
+        $scope.products.push($scope.addMe);
+
+    }
+    $scope.removeItem = function (x) {
+        $scope.products.splice(x, 1);
+    }
+    function linkDownload(a, filename, content) {
+      contentType =  'data:application/octet-stream,';
+      uriContent = contentType + encodeURIComponent(content);
+      a.setAttribute('href', uriContent);
+      a.setAttribute('download', filename);
+    }
+    $scope.download = function(filename) {
+      var a = document.createElement('a');
+      linkDownload(a, filename, $scope.products);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+});
+</script>
+
+
+
+<div ng-app="myList" ng-controller="myCtrl">
+
+  <h2>There are {{products.length}} items in your list</h2>
+
+<br>
+    <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">×</span></li>
+
+  <br>
+  <br>
+   Product <input ng-model="addMe" type="text" placeholder="type product here">
+
+  <button ng-click="addItem()">Add</button>
+  <br>
+  <br>
+  <p>Click the x to remove an item from the list.</p>
+
+   <button ng-click="download('text.txt');">export to txt file</button>
+   <br>
+   <br>
+</div>
+<div>
+  <input type="text" id="n1"/>
+   <select id="operators"/>
+
+     <option value"+">+</option>
+     <option value"-">-</option>
+     <option value"/">/</option>
+  </select>
+   <input type="text" id="n2"/>
+
+  <button onclick="calc();">=</button>
+  <input type="text" id="result"/>
+</div>
+  <br>
+  <br>
+
+<h3>Statistical Calculations</h3>
+
+<textarea id="userInput" rows="1" cols="30"></textarea><br><br>
+<button onClick="mean()">MEAN calc</button>
+<button onClick="variance()">Variance calc</button>
+<button onClick="sum()">SD calc</button>
+<button onClick="sum()">Sum calc</button>
+<button onClick="diff()">Diff calc</button>
+<br><br>
+<input type='text' id='output' readonly>
+
+
+
+
+</body>
+</html>
+>>>>>>> 82aa4644d08cbd0fc2e294fdb5844e0ed56a5028
