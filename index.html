@@ -6,45 +6,15 @@
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/style.css">
-    <script type='text/html' src="/js/mean.js"></script>
-    <script type='text/html' src="/js/calc.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script type='text/html' src='js/statisticcalc.js'></script>
-    <script language="JavaScript"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <script language="JavaScript" src="./js/app.js"></script>
+    <script language="JavaScript" src="./js/calc.js"></script>
 </head>
 
+<!--App starts here  -->
+<!--creating list of items(products) to export it to .txt file  -->
 <body>
- <script>
-var app = angular.module("myList", []);
-app.controller("myCtrl", function($scope) {
-    $scope.products = [];
-
-    $scope.addItem = function () {
-        $scope.products.push($scope.addMe);
-
-    }
-    $scope.removeItem = function (x) {
-        $scope.products.splice(x, 1);
-    }
-    function linkDownload(a, filename, content) {
-      contentType =  'data:application/octet-stream,';
-      uriContent = contentType + encodeURIComponent(content);
-      a.setAttribute('href', uriContent);
-      a.setAttribute('download', filename);
-    }
-    $scope.download = function(filename) {
-      var a = document.createElement('a');
-      linkDownload(a, filename, $scope.products);
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-});
-</script>
-
-
-
 <div ng-app="myList" ng-controller="myCtrl">
 
   <h2>There are {{products.length}} items in your list</h2>
@@ -64,8 +34,28 @@ app.controller("myCtrl", function($scope) {
    <button ng-click="download('text.txt');">export to txt file</button>
    <br>
    <br>
+   <br>
+   <br>
+   <div>
+
+     <!--statistic calculations - code in app.js  -->
+     <h3>Statistical Calculations</h3>
+     <textarea id="userInput" rows="1" cols="30" ng-model="inputVal"></textarea><br><br>
+     <button ng-click="mean()">MEAN calc</button>
+     <button ng-click="variance()">Variance calc</button>
+     <button ng-click="sd()">SD calc</button>
+     <button ng-click="sum()">Sum calc</button>
+     <button ng-click="diff()">Diff calc</button>
+     <br><br>
+     <span>{{mean_result}}</span>
+   </div>
 </div>
 <div>
+  <br>
+  <br>
+  <!--input and oiutput for simple calculation - code in calc.js  -->
+ <h3>Simplple calculation</h3>
+
   <input type="text" id="n1"/>
    <select id="operators"/>
 
@@ -78,39 +68,5 @@ app.controller("myCtrl", function($scope) {
   <button onclick="calc();">=</button>
   <input type="text" id="result"/>
 </div>
-  <br>
-  <br>
-
-<h3>Statistical Calculations</h3>
-<table>
-    <tr>
-        <td>Input Number:</td><td><input type='text' id='input'></td>
-    </tr>
-    <tr>
-        <td colpsan='2'><input type='button' value='Add Number' onClick='addNumber()'></td>
-    </tr>
-    <tr>
-        <td colspan='2'>
-            <select id='list' size='5'>
-            </select>
-        </td>
-    </tr>
-        <tr>
-                <td colpsan='2'><input type='button' value='Calculate!' onClick='getStatistics()'></td>
-        </tr>
-        <tr>
-                <td>Summation:</td><td><input type='text' id='summation' readonly></td>
-        </tr>
-        <tr>
-                <td>Mean:</td><td><input type='text' id='mean' readonly></td>
-        </tr>
-    <tr>
-                <td>Variance:</td><td><input type='text' id='variance' readonly></td>
-        </tr>
-    <tr>
-                <td>Standard Deviation:</td><td><input type='text' id='standardDev' readonly></td>
-        </tr>
-
-
 </body>
 </html>
