@@ -17,7 +17,7 @@ var fs = require ('fs');
 //   if (err) throw err;
 //   console.log('Saved!');
 // });
->>>>>>> 82aa4644d08cbd0fc2e294fdb5844e0ed56a5028
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,7 +33,7 @@ app.use('/js', express.static(__dirname + "/js"));
 app.use('/node_modules', express.static(__dirname + "/node_modules"));
 app.use(express.static(__dirname + "mainController"));
 app.use('/public', express.static(__dirname + "/public"));
->>>>>>> 82aa4644d08cbd0fc2e294fdb5844e0ed56a5028
+
 
 
 app.get('/', function (req, res) {
