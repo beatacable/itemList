@@ -1,4 +1,5 @@
 function mean() {
+var val = document.getElementById('userInput').value;
 var m = 0;
 var sum = 0;
 m_array = m.split(",");

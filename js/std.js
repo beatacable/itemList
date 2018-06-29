@@ -1,27 +1,31 @@
-function sum(x)
-{
-	var sum = 0;
-	for(i = 0; i < x.length; i++)
-	{
-		sum = sum + x[i];
-	}
-	return sum;
-};
+function sum() {
+  var val = document.getElementById('userInput').value;
+  var temp = val.split(" ");
+  var total = 0;
+  var v;
+  var mean = total / temp.length;
+  var total1 = 0;
+  var v1;
+  var temp23;
+  var square;
 
-function mean(x)
-{
-return sum(x) / x.length;
-};
+  for (var i = 0; i < temp.length; i++) {
+    v = parseFloat(temp[i]);
+    total += v;
+  }
 
-function variance(x) {
-		var mean = mean(x);
-		return mean(array.map(sum(sum)) {
-			return Math.pow(sum - mean, 2);
-		}));
-	},
+  mean = total / temp.length;
+
+  for (var i = 0; i < temp.length; i++) {
+    v1 = (Math.pow(parseFloat(temp[i]) - mean), 2);
+    total1 += v1;
+  }
 
 
-function standardDeviation(x)
-{
-		return Math.sqrt(variance(x));
-};
+  temp23 = total1 / temp.length;
+  square = Math.sqrt(temp23);
+
+  document.write(total + '<br />');
+  document.write(mean + '<br />');
+  document.write(square);
+}
