@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+     <title>SNC app</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <script language="JavaScript" src="./js/app.js"></script>
+    <script language="JavaScript" src="./js/calc.js"></script>
+</head>
+
+<!--App starts here  -->
+<!--creating list of items(products) to export it to .txt file  -->
+<body>
+<div ng-app="myList" ng-controller="myCtrl">
+
+  <h2>There are {{products.length}} items in your list</h2>
+
+<br>
+    <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">×</span></li>
+
+  <br>
+  <br>
+   Product <input ng-model="addMe" type="text" placeholder="type product here">
+
+  <button ng-click="addItem()">Add</button>
+  <br>
+  <br>
+  <p>Click the x to remove an item from the list.</p>
+
+   <button ng-click="download('text.txt');">export to txt file</button>
+   <br>
+   <br>
+   <br>
+   <br>
+   <div>
+
+     <!--statistic calculations - code in app.js  -->
+     <h3>Statistical Calculations</h3>
+     <textarea id="userInput" rows="1" cols="30" ng-model="inputVal"></textarea><br><br>
+     <button ng-click="mean()">MEAN calc</button>
+     <button ng-click="variance()">Variance calc</button>
+     <button ng-click="sd()">SD calc</button>
+     <button ng-click="sum()">Sum calc</button>
+     <button ng-click="diff()">Diff calc</button>
+     <br><br>
+     <span>{{mean_result}}</span>
+   </div>
+</div>
+<div>
+  <br>
+  <br>
+  <!--input and oiutput for simple calculation - code in calc.js  -->
+ <h3>Simplple calculation</h3>
+
+  <input type="text" id="n1"/>
+   <select id="operators"/>
+
+     <option value"+">+</option>
+     <option value"-">-</option>
+     <option value"/">/</option>
+  </select>
+   <input type="text" id="n2"/>
+
+  <button onclick="calc();">=</button>
+  <input type="text" id="result"/>
+</div>
+</body>
+</html>
